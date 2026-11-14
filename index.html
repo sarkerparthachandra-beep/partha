@@ -13,7 +13,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
 main{max-width:560px;margin:0 auto;padding:28px 16px 48px}
 .card{background:var(--card);border:1px solid var(--line);padding:18px}
-.card+.card{margin-top:14px}
+main{display:flex;flex-direction:column;gap:14px}.rcol{display:contents}.card+.card{margin-top:0}
 .label{font-size:12px;color:var(--muted);margin:0 0 10px}
 h1{font-weight:300;font-size:clamp(34px,10vw,52px);line-height:1;letter-spacing:-.02em;margin:0 0 18px;text-transform:uppercase}
 .photo{position:relative;display:block;width:100%;aspect-ratio:3/4;padding:0;border:0;background:var(--ph);overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -43,7 +43,7 @@ h1{font-weight:300;font-size:clamp(34px,10vw,52px);line-height:1;letter-spacing:
 .facts strong::after{content:"";display:block;height:1px;width:0;background:var(--text);margin-top:5px;transition:width .45s ease}
 .facts div:hover strong::after{width:100%}
 .chips li{transition:border-color .3s,transform .3s}
-.chips li:hover{border-color:#555;transform:translateY(-2px)}
+.chips li:hover{border-color:var(--acc);transform:translateY(-2px)}
 .track{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text)}
 .sp{flex:none;width:46px;height:46px;border-radius:50%;background:#1db954;display:grid;place-items:center;transition:transform .35s}
 .sp svg{width:26px;height:26px}
@@ -101,6 +101,10 @@ body{overflow-x:clip}
 .ic.open .tags li{opacity:1;transform:none;border-color:var(--acc);transition-delay:calc(var(--j)*70ms + .25s)}
 @media(hover:hover){.ic:hover{border-color:var(--acc);box-shadow:0 0 0 1px var(--glow),0 10px 34px var(--glow);transform:translateY(-2px)}.ic:hover .ic-icon{transform:rotate(-8deg) scale(1.08)}}
 .clock{text-align:center}
+.built{text-align:center}
+.built .chips{justify-content:center}
+.built-note{font-size:13px;color:var(--muted);line-height:1.5;margin:14px 0 0}
+@media(min-width:1100px){.built{grid-column:1/-1}}
 .ck-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .live{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
 .live i{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:pulse 2s ease-in-out infinite}
@@ -108,16 +112,26 @@ body{overflow-x:clip}
 .ck-time{font-size:clamp(40px,11vw,84px);font-weight:300;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
 .ck-time b{font-weight:300;color:var(--acc);margin:0 .06em}
 .ck-time small{font-size:.28em;letter-spacing:.1em;margin-left:.5em;color:var(--muted);text-transform:uppercase}
-.ck-time span.tick{animation:tick .45s ease}
-@keyframes tick{from{opacity:.25;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.edu-list{list-style:none;margin:0;padding:0}
+.edu-list li{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1px solid var(--line)}
+.edu-list li:first-child{border-top:0;padding-top:2px}
+.edu-list li:last-child{padding-bottom:0}
+.inst{font-size:clamp(18px,1.5vw,22px);font-weight:300;line-height:1.3;transition:color .35s,transform .35s}
+.lv{font-size:13px;color:var(--muted);line-height:1.4}
+@media(hover:hover){.edu-list li:hover .inst{color:var(--acc);transform:translateX(3px)}}
+.ck-time .u{position:relative;display:inline-block}
+.u .n{display:inline-block}
+.u .n.in{animation:nin .65s cubic-bezier(.2,.8,.2,1)}
+.u .o{position:absolute;left:0;top:0;pointer-events:none;animation:nout .45s ease forwards}
+@keyframes nin{from{opacity:0;filter:blur(10px);transform:translateY(-6px)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes nout{from{opacity:1;filter:blur(0)}to{opacity:0;filter:blur(10px);transform:translateY(6px)}}
 .ck-date{font-size:clamp(14px,1.4vw,18px);margin:16px 0 4px}
 .ck-place{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
 @media(min-width:600px){main{max-width:720px}.card{padding:22px}.photo{aspect-ratio:4/5}.ic-grid{grid-template-columns:1fr 1fr;align-items:start}}
 @media(min-width:1100px){
 main{max-width:min(1200px,calc(100% - 64px));padding:40px 0 64px;display:grid;grid-template-columns:5fr 7fr;gap:20px;align-items:start}
-.card+.card{margin-top:0}
-#profile{grid-column:1;grid-row:1/span 3}
-.interests{grid-column:2;grid-row:1}.music{grid-column:2;grid-row:2}.contact{grid-column:2;grid-row:3}
+.rcol{display:flex;flex-direction:column;gap:20px;grid-column:2}
+#profile{grid-column:1}
 .clock{grid-column:1/-1}
 h1{font-size:clamp(40px,3.6vw,72px)}
 .facts strong{font-size:clamp(19px,1.5vw,26px)}
@@ -136,7 +150,7 @@ h1{font-size:clamp(40px,3.6vw,72px)}
 .panel-in{max-height:min(240px,42vh);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--acc) transparent}
 .panel-in::-webkit-scrollbar{width:4px}
 .panel-in::-webkit-scrollbar-thumb{background:var(--acc);border-radius:4px}
-@media (prefers-reduced-motion:reduce){.sr{opacity:1;transform:none;transition:none}.tt-knob,.tt-knob svg,.live i{transition:none;animation:none}.rv{opacity:1;transform:none;transition:none}.photo img{transition-duration:.01s}.social a{transition:none}}
+@media (prefers-reduced-motion:reduce){.sr{opacity:1;transform:none;transition:none}.tt-knob,.tt-knob svg,.live i,.u .n.in,.u .o{transition:none;animation:none}.rv{opacity:1;transform:none;transition:none}.photo img{transition-duration:.01s}.social a{transition:none}}
 </style>
 <script>try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
 </head>
@@ -155,9 +169,23 @@ h1{font-size:clamp(40px,3.6vw,72px)}
   </div>
 </section>
 
+<div class="rcol">
+<section class="card edu sr">
+  <p class="label">Education</p>
+  <ul class="edu-list">
+    <li><span class="inst">Barkota School And College</span><span class="lv">Higher Secondary Certificate (HSC)</span></li>
+    <li><span class="inst">Gouripur S.A. High School</span><span class="lv">Secondary School Certificate (SSC)</span></li>
+  </ul>
+</section>
+
 <section class="card interests sr">
   <p class="label">Interests</p>
   <div class="ic-grid"><div class="ic"><button class="ic-head" type="button" aria-expanded="false"><span class="ic-icon"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><span class="ic-name">Photography</span><span class="ic-ex"><span class="ex-t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="panel"><div><div class="panel-in"><p>Photography is how I slow down and notice the world around me. I enjoy framing moments, light and places in a way that feels honest and memorable.</p><ul class="tags"><li style="--j:0">Nature & Landscapes</li><li style="--j:1">Travel & Adventure</li><li style="--j:2">Culture & Traditions</li><li style="--j:3">Street & Lifestyle Photography</li><li style="--j:4">Architecture</li></ul></div></div></div></div><div class="ic"><button class="ic-head" type="button" aria-expanded="false"><span class="ic-icon"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span><span class="ic-name">Fitness & Healthy Lifestyle</span><span class="ic-ex"><span class="ex-t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="panel"><div><div class="panel-in"><p>I’m working on improving my fitness and maintaining a healthy lifestyle. My main goal is to stay healthy, energetic, and active, rather than building huge muscles.</p><ul class="tags"><li style="--j:0">Healthy</li><li style="--j:1">Energetic</li><li style="--j:2">Active</li></ul></div></div></div></div><div class="ic"><button class="ic-head" type="button" aria-expanded="false"><span class="ic-icon"><svg viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg></span><span class="ic-name">Technology & Innovation</span><span class="ic-ex"><span class="ex-t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="panel"><div><div class="panel-in"><p>I’m curious about how technology keeps changing what is possible. For me it is a way to turn creative ideas into reality.</p><ul class="tags"><li style="--j:0">Artificial Intelligence</li><li style="--j:1">Web Development</li><li style="--j:2">Digital Creativity</li><li style="--j:3">Modern Gadgets</li><li style="--j:4">Innovative digital tools</li></ul></div></div></div></div><div class="ic"><button class="ic-head" type="button" aria-expanded="false"><span class="ic-icon"><svg viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3M5 6v4M19 14v4M10 2v2M7 8H3M21 16h-4M11 3H9"/></svg></span><span class="ic-name">Photo Editing & Creative Design</span><span class="ic-ex"><span class="ex-t"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button><div class="panel"><div><div class="panel-in"><p>Editing is where a photo finds its mood. I love shaping images with a creative eye until they tell the story I had in mind.</p><ul class="tags"><li style="--j:0">Cinematic color grading</li><li style="--j:1">Creative editing</li><li style="--j:2">Aesthetic compositions</li><li style="--j:3">Visual storytelling</li></ul></div></div></div></div></div>
+</section>
+
+<section class="card skills sr">
+  <p class="label">Skills</p>
+  <ul class="chips"><li>Bengali &amp; English Communication</li><li>Teamwork &amp; Collaboration</li><li>Quick Learning</li><li>Time Management</li><li>Adaptability</li><li>Problem Solving</li></ul>
 </section>
 
 <section class="card music sr">
@@ -180,12 +208,18 @@ h1{font-size:clamp(40px,3.6vw,72px)}
     <a class="gm" href="mailto:sarkerpartha431@gmail.com" aria-label="Gmail"><svg viewBox="0 0 24 24"><path fill="#ea4335" d="M2 6.500v11A1.500 1.500 0 0 0 3.500 19H6V9.800l6 4.500 6-4.500V19h2.500a1.500 1.500 0 0 0 1.500-1.500v-11c0-1.900-2.100-2.900-3.600-1.800L12 9.600 5.600 4.700C4.100 3.600 2 4.600 2 6.500z"/><path fill="#4285f4" d="M18 9.800V19h2.500a1.500 1.500 0 0 0 1.500-1.500V6.500z"/><path fill="#34a853" d="M6 9.800V19H3.500A1.500 1.500 0 0 1 2 17.500v-11z"/></svg></a>
   </div>
 </section>
+</div>
 <section class="card clock sr">
   <p class="label ck-top"><span>Local time</span><span class="live"><i></i>Live</span></p>
-  <div class="ck-time"><span id="ckh">--</span><b>:</b><span id="ckm">--</span><b>:</b><span id="cks">--</span><small id="ckap"></small></div>
+  <div class="ck-time"><span class="u" id="ckh"><span class="n">--</span></span><b>:</b><span class="u" id="ckm"><span class="n">--</span></span><b>:</b><span class="u" id="cks"><span class="n">--</span></span><small id="ckap"></small></div>
   <p class="ck-date" id="ckd"></p>
   <p class="ck-place" id="ckp"></p>
 </section>
+<footer class="card built sr">
+  <p class="label">Built with</p>
+  <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+  <p class="built-note">Written in plain HTML, CSS and JavaScript, with no frameworks.</p>
+</footer>
 </main>
 <script>
 (function(){
@@ -245,13 +279,18 @@ h1{font-size:clamp(40px,3.6vw,72px)}
   });
   var H=document.getElementById('ckh'),M=document.getElementById('ckm'),S=document.getElementById('cks'),AP=document.getElementById('ckap'),D=document.getElementById('ckd'),P=document.getElementById('ckp');
   var tz='UTC';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC'}catch(e){}
-  var tf=new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:tz});
+  var tf=new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true,timeZone:tz});
   var df=new Intl.DateTimeFormat(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:tz});
   function nm(o){try{var r=new Intl.DateTimeFormat('en',{timeZone:tz,timeZoneName:o}).formatToParts(new Date()).filter(function(x){return x.type==='timeZoneName'})[0];return r?r.value:''}catch(e){return ''}}
   var city=tz.indexOf('/')>-1?tz.split('/').pop().replace(/_/g,' '):tz;
   var long=nm('long'),off=nm('shortOffset');
   P.textContent=city+(long&&long!==city?' · '+long:'')+(off?' · '+off:'');
-  function set(el,v){if(el.textContent!==v){el.textContent=v;el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick')}}
+  function set(el,v){
+    var n=el.querySelector('.n');if(n.textContent===v)return;
+    el.querySelectorAll('.o').forEach(function(x){x.remove()});
+    if(n.textContent!=='--'){var o=document.createElement('span');o.className='o';o.textContent=n.textContent;el.appendChild(o);setTimeout(function(){o.remove()},600)}
+    n.textContent=v;n.classList.remove('in');void n.offsetWidth;n.classList.add('in');
+  }
   var lastD='';
   function upd(){
     var now=new Date(),p={};tf.formatToParts(now).forEach(function(x){p[x.type]=x.value});
